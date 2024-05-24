@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4670339688675656742}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.664316, y: 4, z: 0}
+  m_LocalPosition: {x: -1.7440224, y: 4, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -50,7 +50,7 @@ MonoBehaviour:
   _value: 1
   _rb2d: {fileID: 6045923555807166852}
   _prefabReference: {fileID: 4670339688675656742}
-  _invunerabilityTimer: 1.5
+  _invunerabilityTimer: 1
 --- !u!212 &1676758862785211865
 SpriteRenderer:
   m_ObjectHideFlags: 0

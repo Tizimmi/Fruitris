@@ -18,7 +18,6 @@ public class ScoreView : MonoBehaviour
     public void UpdateCurrentScore(int score)
 	{
 		_currentScoreArea.text = $"Current score: {currentScore += score}";
-		print(currentScore);
 	}
 
 	public void UpdateMaxScore(int score)
