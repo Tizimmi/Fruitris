@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2620402757897037583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3725573927306827045}
+  - component: {fileID: 3590071017164503035}
+  m_Layer: 0
+  m_Name: FruitSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3725573927306827045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620402757897037583}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3590071017164503035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620402757897037583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f216a561f6cf3448c187033ef9875a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstSpawnableFruits:
+  - {fileID: -6886517401214080112, guid: c3784e176daf32b44a70bfac42318a43, type: 3}
+  - {fileID: -1172032977041978050, guid: a59af279b48d7534f8fe49b50c8f896b, type: 3}
+  _fruitsRoot: {fileID: 3725573927306827045}
+  fruits:
+  - {fileID: -6886517401214080112, guid: c3784e176daf32b44a70bfac42318a43, type: 3}
+  - {fileID: -1172032977041978050, guid: a59af279b48d7534f8fe49b50c8f896b, type: 3}
+  - {fileID: -5185377735769379649, guid: a6877a314d9a8c942b3925ea0107edef, type: 3}
+  - {fileID: -7524268116079108443, guid: 7c8632d90c78a0d4eafe3657cc4ac020, type: 3}
+  - {fileID: -415014506711943263, guid: d973bfec7434cc642bc92f904ae88497, type: 3}
+  - {fileID: 1774121774245849353, guid: 259fc1ab7704e664bab6522a9a7287c4, type: 3}
+  - {fileID: 2924645277150752003, guid: de71cf7fdfe22564286a146a061d907f, type: 3}
+  - {fileID: -9065795862591585888, guid: 04dfb1b7949ecfa4c8ca7c43fe985378, type: 3}
+  - {fileID: -7442280235866803835, guid: 9f93fac9241654e4b90337e9bce55bac, type: 3}
+  - {fileID: 5848626750440398653, guid: a46d9d2d1697b9d48a7d52ccc05eb4f0, type: 3}
+  _raycastMask:
+    serializedVersion: 2
+    m_Bits: 64
