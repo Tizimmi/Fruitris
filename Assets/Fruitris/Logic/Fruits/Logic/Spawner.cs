@@ -20,11 +20,6 @@ public class Spawner : MonoBehaviour
     private Vector2 _mousePositon;
     private Fruit _currentFruit;
 
-    private void Start()
-    {
-        _currentFruit = SelectFruit();
-        
-    }
     private void Update()
     {
         _mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);

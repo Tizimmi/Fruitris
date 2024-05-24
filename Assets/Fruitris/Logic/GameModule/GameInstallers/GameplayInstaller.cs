@@ -15,6 +15,7 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<ScoreView>().FromInstance(_scoreView).AsSingle().NonLazy();
         Container.Bind<Spawner>().FromInstance(_spawner).AsSingle().NonLazy();
         Container.Bind<GamePrefabFactory>().FromNew().AsSingle().NonLazy();
+        Container.Bind<MergeFruitsStrategy>().FromNew().AsSingle().NonLazy();
         Container.Bind<Player>().FromResolveGetter<GamePrefabFactory>(f => f.InstantiatePrefab<Player>(_playerPrefab,Vector3.zero,Quaternion.identity, _spawner.transform)).AsSingle().NonLazy();
     }
 

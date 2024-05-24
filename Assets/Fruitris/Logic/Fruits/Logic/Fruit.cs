@@ -5,7 +5,7 @@ using Zenject;
 public class Fruit : MonoBehaviour
 {
     [SerializeField]
-    private int _value;
+    public int _value;
     [SerializeField]
     private Rigidbody2D _rb2d;
     [SerializeField]
@@ -14,11 +14,9 @@ public class Fruit : MonoBehaviour
     private float _invunerabilityTimer;
 
     [Inject]
-    private readonly Spawner _spawner;
-    [Inject]
-    private readonly ScoreView _scoreView;
+    private readonly MergeFruitsStrategy _merger;
 
-    private static CollisionInfoCollection _collisions = new();
+    private static readonly CollisionInfoCollection _collisions = new();
     private bool _canFinish = false;
 
     public IEnumerator Timer()
@@ -52,12 +50,13 @@ public class Fruit : MonoBehaviour
         {
             return;
         }
+        Fruit firstFruit = this;
         Fruit secondFruit = collision.gameObject.GetComponent<Fruit>();
-        if (_collisions.Contains(secondFruit) || _collisions.Contains(this))
+        if (_collisions.Contains(secondFruit) || _collisions.Contains(firstFruit))
         {
             return;
         }
-        _collisions.AddItemInCollection(this, secondFruit);
+        _collisions.AddItemInCollection(firstFruit, secondFruit);
         Vector3 spawnPoint = new();
         foreach (ContactPoint2D contactPoint in collision.contacts)
         {
@@ -65,18 +64,7 @@ public class Fruit : MonoBehaviour
             spawnPoint = new Vector3(hitPoint.x, hitPoint.y, 0);
         }
 
-        if (int.Parse(gameObject.tag) < _spawner.fruits.Count - 1)
-        {
-            Merge(collision.gameObject, gameObject, spawnPoint);
-        }
-        _scoreView.UpdateCurrentScore(_value);
-        Destroy(collision.gameObject);
-        Destroy(gameObject);
-    }
-
-    private void Merge(GameObject fruitA, GameObject fruitB, Vector2 position) // сделать MergeFruitStrategy
-    {
-        _spawner.SpawnFruit(int.Parse(fruitA.tag), position);
+        _merger.Merge(firstFruit, secondFruit, spawnPoint);
     }
 
     private void OnTriggerStay2D(Collider2D other)
