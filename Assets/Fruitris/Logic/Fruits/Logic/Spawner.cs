@@ -31,13 +31,14 @@ public class Spawner : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && CheckMousePosition())
         {
-            _currentFruit = SpawnFruit(_currentFruit, new Vector2(_mousePositon.x, gameObject.transform.position.y));
+            _currentFruit = SpawnFruit(SelectFruit(), new Vector2(_mousePositon.x, gameObject.transform.position.y));
             _currentFruit.ChangeIsGravitational(false);
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0) && _currentFruit!=null)
         {
             _currentFruit.ChangeIsGravitational(true);
-            _currentFruit = SelectFruit();
+            _currentFruit.StartCoroutine("Timer");
+            _currentFruit = null;
 
         }
         else if (Input.GetMouseButton(0) && CheckMousePosition() && _currentFruit != null)

@@ -79,7 +79,7 @@ public class Fruit : MonoBehaviour
         _spawner.SpawnFruit(int.Parse(fruitA.tag), position);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (_canFinish && other.gameObject.CompareTag("GameOverTrigger"))
         {
