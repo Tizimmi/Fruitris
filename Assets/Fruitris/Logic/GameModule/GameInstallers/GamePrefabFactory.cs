@@ -15,6 +15,11 @@ public class GamePrefabFactory
         return _container.InstantiatePrefab(prefab, position, rotation, parentTransform);
     }
 
+    public GameObject InstantiatePrefab(Object prefab, Transform root)
+    {
+        return _container.InstantiatePrefab(prefab, root);
+    }
+
     public T InstantiatePrefab<T>(
             Object prefab,
             Vector3 position,
@@ -27,6 +32,11 @@ public class GamePrefabFactory
                 rotation,
                 parentTransform)
             .GetComponent<T>();
+    }
+
+    public T InstantiatePrefab<T>(Object prefab, Transform parentTransform) where T : Component
+    {
+        return InstantiatePrefab(prefab, parentTransform).GetComponent<T>();
     }
 
 }

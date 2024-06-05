@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour
 
     public Fruit SpawnFruit(Fruit fruit, Vector2 spawnPosition)
     {
-        fruit = _gamePrefabFactory.InstantiatePrefab<Fruit>(fruit, spawnPosition, Quaternion.identity, _fruitsRoot); ;
+        fruit = _gamePrefabFactory.InstantiatePrefab<Fruit>(fruit, spawnPosition, Quaternion.identity, _fruitsRoot);
         return fruit;
     }
 

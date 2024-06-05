@@ -1,14 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class Player : MonoBehaviour
 {
-    private string _name;
-    [Inject]
-    private LeaderBoard _scoreData;
+    public string Nickname;
+    public int MaxScore;
 
-    private void Start()
+    public void SavePlayer()
     {
+        SaveHandler.SavePlayerData(this);
+    }
 
+    public void LoadPlayer()
+    {
+        PlayerData data = SaveHandler.LoadPlayerData();
+
+        Nickname = data.Nickname;
+        MaxScore = data.MaxScore;
     }
 }
