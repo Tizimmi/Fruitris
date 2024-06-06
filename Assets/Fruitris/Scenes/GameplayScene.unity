@@ -385,6 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eb48d40ee722c4188fbacdd3ba4dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Nickname: 
+  MaxScore: 0
 --- !u!1 &684670809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1272343720}
   _scoreView: {fileID: 6623684373678192385}
+  _playerPrefab: {fileID: 403564186784017880, guid: bcdfa9c435dc76a4ebb38bcc437f02b2, type: 3}
 --- !u!4 &1834912152
 Transform:
   m_ObjectHideFlags: 0
