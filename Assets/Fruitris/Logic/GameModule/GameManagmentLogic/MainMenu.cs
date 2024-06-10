@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,18 +18,16 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private TMP_InputField _nameInput;
 
-    private string _playerName = "Noname"; 
-
     private void Start()
     {
-        _startButton.onClick.AddListener(() => _gameStateHandler.GameStart(_playerName));
-        _nameInput.onEndEdit.AddListener((string name) => ChangeName(_nameInput.text));
+        _nameInput.onEndEdit.AddListener(CreateName);
+        _startButton.onClick.AddListener(_gameStateHandler.GameStart);
     }
 
-    public void ChangeName(string playerName)
+    private void CreateName(string name)
     {
-        _playerName = playerName;
-        _startButton.onClick.RemoveListener(() => _gameStateHandler.GameStart(_playerName));
-        _startButton.onClick.AddListener(() => _gameStateHandler.GameStart(_playerName));
+        _gameStateHandler.CreatePlayer(new(name, 0));
+        print(name);
     }
+
 }

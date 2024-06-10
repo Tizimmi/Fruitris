@@ -4,23 +4,22 @@ using Zenject;
 
 public class GameStateHandler : MonoBehaviour
 {
-    [Inject]
-    private readonly GamePrefabFactory _gamePrefabFactory;
-    [SerializeField]
-    private Player _player;
-
+    public PlayerData _currentPlayer; //??
     private void Start()
     {
 
     }
-    public void GameStart(string playerName)
+    
+    public void CreatePlayer(PlayerData data)
+    {
+        PlayerSaveHandler.SavePlayerInfo(data);
+       LeaderBoard.AddPlayerToAllPlayers(data);
+        _currentPlayer = data;
+    }
+    public void GameStart()
     {
         SceneManager.LoadScene("GameplayScene");
-        print(playerName);
-        //_gamePrefabFactory.InstantiatePrefab<Player>(_player, gameObject.transform);
-        _player.Nickname = playerName;
-
-        _player.SavePlayer();
+        print(_currentPlayer.Nickname);
     }
 
     public void GameOver()

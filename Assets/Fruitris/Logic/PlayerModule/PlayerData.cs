@@ -12,7 +12,7 @@ public class PlayerData : IComparable<PlayerData>
 		MaxScore = maxscore;
 	}
 
-	public PlayerData(Player player)
+	public PlayerData(PlayerData player)
 	{
 		Nickname = player.Nickname;
 		MaxScore = player.MaxScore;

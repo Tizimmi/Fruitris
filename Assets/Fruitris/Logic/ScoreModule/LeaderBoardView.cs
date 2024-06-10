@@ -5,8 +5,6 @@ using Zenject;
 public class LeaderBoardView : MonoBehaviour
 {
     [Inject]
-    private readonly LeaderBoard _leaderBoard;
-    [Inject]
     private readonly GamePrefabFactory _gamePrefabFactory;
     [Inject]
     private readonly ScoreView _scoreView;
@@ -28,12 +26,12 @@ public class LeaderBoardView : MonoBehaviour
         for (int i = 0; i < _panelCapacity; i++)
         {
             LeaderBoardItemView prefab = _gamePrefabFactory.InstantiatePrefab<LeaderBoardItemView>(_leaderBoardItemPrefab, _root);
-            prefab.Init(_leaderBoard.GetTopPlayers(ref _panelCapacity)[i], i + 1);
+            prefab.Init(LeaderBoard.GetTopPlayers(ref _panelCapacity)[i], i + 1);
             _items.Add(prefab);
 
             if (i == 0)
             {
-                _scoreView.UpdateMaxScore(_leaderBoard.GetTopPlayers(ref _panelCapacity)[i].MaxScore);
+                _scoreView.UpdateMaxScore(LeaderBoard.GetTopPlayers(ref _panelCapacity)[i].MaxScore);
             }
         }
     }
@@ -43,7 +41,7 @@ public class LeaderBoardView : MonoBehaviour
         int length = _items.Count;
         for (int i = 0; i < length; i++)
         {
-            _items[i].Init(_leaderBoard.GetTopPlayers(ref length)[i], i);
+            _items[i].Init(LeaderBoard.GetTopPlayers(ref length)[i], i);
         }
     }
 }

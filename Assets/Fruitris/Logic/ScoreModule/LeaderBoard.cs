@@ -1,17 +1,33 @@
-﻿using System;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class LeaderBoard
+public static class LeaderBoard
 {
-    private List<PlayerData> _allPlayers = new();
-    private List<PlayerData> _topPlayers = new();
+    public static List<PlayerData> _allPlayers = new();
+    private static List<PlayerData> _topPlayers = new();
 
-    public LeaderBoard()
+    static LeaderBoard()
     {
-        _allPlayers.AddRange(new List<PlayerData> { new PlayerData("Oleg", 123), new PlayerData("vasili", 333), new PlayerData("Armyashka", 777), new PlayerData("Petr", 1111), new PlayerData("Kolyan", 2345) });
+        _allPlayers = LeaderboardSaveHandler.Load().PlayerData;
+        if (_allPlayers.Count > 0)
+        {
+            foreach (var item in _allPlayers)
+            {
+                Debug.Log(item.Nickname);
+            }
+        }
+        else
+        {
+            Debug.Log("ПУСТОЙ");
+        }
     }
 
-    public List<PlayerData> GetTopPlayers(ref int count)
+    public static void AddPlayerToAllPlayers(PlayerData data)
+    {
+        _allPlayers.Add(data);
+    }
+
+    public static List<PlayerData> GetTopPlayers(ref int count)
     {
         if (count > _allPlayers.Count) // костылечек
         {
@@ -29,5 +45,7 @@ public class LeaderBoard
             _topPlayers.Add(_allPlayers[i]);
         }
         return _topPlayers;
+
+        
     }
 }
