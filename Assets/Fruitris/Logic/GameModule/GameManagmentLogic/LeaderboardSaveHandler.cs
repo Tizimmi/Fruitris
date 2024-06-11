@@ -27,29 +27,20 @@ public static class LeaderboardSaveHandler
         var json = JsonUtility.ToJson(data);
         PlayerPrefs.SetString(SaveKey, json);
     }
-
-    public static void Test()
-    {
-        var SaveData = new SaveData();
-        SaveData.PlayerData = new List<PlayerData>()
-        {
-            new("123", 123),
-            new("1233R1AS", 123),
-            new("1233R1ASS", 123),
-            new("1233R1AAASDASDS", 123),
-            new("1QWDASVFC233R1AS", 123)
-        };
-
-        var json = JsonUtility.ToJson(SaveData);
-        Debug.Log(json);
-
-        var data = JsonUtility.FromJson<SaveData>(json);
-    }
-
     [Serializable]
     public class SaveData
     {
-        public List<PlayerData> PlayerData = new();
+        public List<PlayerData> _allPlayerData = new();
+
+        public SaveData(List<PlayerData> data)
+        {
+            _allPlayerData = data;
+        }
+
+        public SaveData()
+        {
+
+        }
     }
 
 }

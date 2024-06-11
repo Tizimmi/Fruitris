@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1272343720}
   _scoreView: {fileID: 6623684373678192385}
-  _gameStateHandler: {fileID: -6063842874638105206, guid: cf23c596663cf5f45909fa795882e58d, type: 3}
+  _leaderboard: {fileID: 958996599354647834}
 --- !u!4 &1834912152
 Transform:
   m_ObjectHideFlags: 0
@@ -1321,7 +1321,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 266027763161323390, guid: 24f11c9a160d6ad4aa3117a7a0101a38, type: 3}
       propertyPath: _panelCapacity
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3326457330762003488, guid: 24f11c9a160d6ad4aa3117a7a0101a38, type: 3}
       propertyPath: m_Pivot.x
@@ -1416,6 +1416,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24f11c9a160d6ad4aa3117a7a0101a38, type: 3}
+--- !u!114 &958996599354647834 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 266027763161323390, guid: 24f11c9a160d6ad4aa3117a7a0101a38, type: 3}
+  m_PrefabInstance: {fileID: 958996599354647833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0847d9e431185034aaac17a166f7e016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5520967926371940736
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,15 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 public class MainMenu : MonoBehaviour
 {
-    [Inject]
-    private readonly GameStateHandler _gameStateHandler;
 
     [SerializeField]
     private Button _startButton;
@@ -21,12 +15,12 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         _nameInput.onEndEdit.AddListener(CreateName);
-        _startButton.onClick.AddListener(_gameStateHandler.GameStart);
+        _startButton.onClick.AddListener(GameStateHandler.GameStart);
     }
 
     private void CreateName(string name)
     {
-        _gameStateHandler.CreatePlayer(new(name, 0));
+        GameStateHandler.CreatePlayer(new(name, 0));
         print(name);
     }
 

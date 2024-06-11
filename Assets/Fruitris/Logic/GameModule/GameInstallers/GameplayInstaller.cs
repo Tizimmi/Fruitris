@@ -10,7 +10,7 @@ public class GameplayInstaller : MonoInstaller
     [SerializeField]
     private ScoreView _scoreView;
     [SerializeField]
-    private GameStateHandler _gameStateHandler;
+    private LeaderBoardView _leaderboard;
 
     public override void InstallBindings()
     {
@@ -18,6 +18,12 @@ public class GameplayInstaller : MonoInstaller
         Container.Bind<Spawner>().FromInstance(_spawner).AsSingle().NonLazy();
         Container.Bind<ScoreView>().FromInstance(_scoreView).AsSingle().NonLazy();
         Container.Bind<MergeFruitsStrategy>().FromNew().AsSingle().NonLazy();
-        Container.Bind<GameStateHandler>().FromInstance(_gameStateHandler).AsSingle().NonLazy();
+        Container.Bind<LeaderBoardView>().FromInstance(_leaderboard).AsSingle().NonLazy();
+    }
+
+    private void OnApplicationQuit()
+    {
+        GameStateHandler._currentPlayer?.SavePlayerData();
+        LeaderBoard.SaveLeaderBoard();
     }
 }

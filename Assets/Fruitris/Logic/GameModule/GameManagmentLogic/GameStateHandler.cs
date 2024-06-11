@@ -1,29 +1,32 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
-public class GameStateHandler : MonoBehaviour
+public static class GameStateHandler
 {
-    public PlayerData _currentPlayer; //??
-    private void Start()
-    {
+    public static PlayerData _currentPlayer = null;
 
+    static GameStateHandler()
+    {
+        
     }
-    
-    public void CreatePlayer(PlayerData data)
+    public static void CreatePlayer(PlayerData data)
     {
         PlayerSaveHandler.SavePlayerInfo(data);
        LeaderBoard.AddPlayerToAllPlayers(data);
         _currentPlayer = data;
     }
-    public void GameStart()
+    public static void GameStart()
     {
+        if(_currentPlayer == null)
+        {
+            CreatePlayer(new("Noname", 0));
+        }
         SceneManager.LoadScene("GameplayScene");
-        print(_currentPlayer.Nickname);
     }
 
-    public void GameOver()
+    public static void GameOver()
     {
-
+        
     }
 }
