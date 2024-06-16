@@ -6,8 +6,6 @@ public class LeaderBoardView : MonoBehaviour
 {
     [Inject]
     private readonly GamePrefabFactory _gamePrefabFactory;
-    [Inject]
-    private readonly ScoreView _scoreView;
 
     [SerializeField]
     private LeaderBoardItemView _leaderBoardItemPrefab;

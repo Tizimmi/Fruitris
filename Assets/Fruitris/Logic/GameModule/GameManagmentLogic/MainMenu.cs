@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private Button _startButton;
     [SerializeField]
-    private Button _settingsButton;
+    private Button _quitButton;
     [SerializeField]
     private TMP_InputField _nameInput;
 
@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     {
         _nameInput.onEndEdit.AddListener(CreateName);
         _startButton.onClick.AddListener(GameStateHandler.GameStart);
+        _quitButton.onClick.AddListener(GameStateHandler.GameQuit);
     }
 
     private void CreateName(string name)

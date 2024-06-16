@@ -264,5 +264,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _leaderBoardItemPrefab: {fileID: -8069532163117215854, guid: 0c9615127e82441409cb6aac25992b7a, type: 3}
-  _panelCapacity: 3
+  _panelCapacity: 5
   _root: {fileID: 5553366911166039615}

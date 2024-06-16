@@ -72,6 +72,7 @@ public class Fruit : MonoBehaviour
         if (_canFinish && other.gameObject.CompareTag("GameOverTrigger"))
         {
             print("YOU LOSE");
+            GameStateHandler.GameOver();
         }
     }
 }

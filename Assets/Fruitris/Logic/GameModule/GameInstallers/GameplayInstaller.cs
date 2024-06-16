@@ -23,7 +23,6 @@ public class GameplayInstaller : MonoInstaller
 
     private void OnApplicationQuit()
     {
-        GameStateHandler._currentPlayer?.SavePlayerData();
-        LeaderBoard.SaveLeaderBoard();
+        
     }
 }

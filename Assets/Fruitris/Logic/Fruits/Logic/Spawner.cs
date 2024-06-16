@@ -39,8 +39,6 @@ public class Spawner : MonoBehaviour
         {
             _currentFruit.transform.position = new Vector2(_mousePositon.x, gameObject.transform.position.y);
         }
-
-
     }
     public Fruit SelectFruit()
     {
@@ -62,5 +60,4 @@ public class Spawner : MonoBehaviour
     {
         return Physics2D.Raycast(_mousePositon, Vector2.down, 5, _raycastMask);
     }
-
 }

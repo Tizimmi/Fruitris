@@ -35,6 +35,6 @@ public class ScoreView : MonoBehaviour
     public void UpdateMaxScore(int score)
     {
         _maxScoreArea.text = $"Max score: {score}";
-        _leaderboardView.UpdateLeaderBoard();
+        //_leaderboardView.UpdateLeaderBoard();
     }
 }

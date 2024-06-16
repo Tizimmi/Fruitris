@@ -37,4 +37,12 @@ public static class LeaderBoard
 
         return _topPlayers;
     }
+
+    public static void ShowLeaderboard()
+    {
+        foreach (var item in _allPlayers)
+        {
+            Debug.Log(item.Nickname + " " + item.MaxScore);
+        }
+    }
 }
