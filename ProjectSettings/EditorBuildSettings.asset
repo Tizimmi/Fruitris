@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Fruitris/Scenes/MainMenuScene.unity
+    guid: e7ede3afa37387a49925a0a40ccfa77c
+  - enabled: 1
     path: Assets/Fruitris/Scenes/GameplayScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Fruitris/Scenes/GameOverScene.unity
+    guid: d61b0369b4a23f642adfe077742fe679
   m_configObjects: {}

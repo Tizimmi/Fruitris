@@ -8,7 +8,6 @@ public static class GameStateHandler
     public static void CreatePlayer(PlayerData data)
     {
         PlayerSaveHandler.SavePlayerInfo(data);
-        LeaderBoard.AddPlayerToAllPlayers(data);
         _currentPlayer = data;
     }
     public static void GameStart()
@@ -22,8 +21,17 @@ public static class GameStateHandler
 
     public static void GameOver()
     {
+        if(LeaderBoard._allPlayers.Contains(_currentPlayer) == false)
+        {
+            LeaderBoard.AddPlayerToAllPlayers(_currentPlayer);  
+        }
         SceneManager.LoadScene(2);
         LeaderBoard.ShowLeaderboard();
+    }
+
+    public static void GameRestart()
+    {
+
     }
 
     public static void GameQuit()

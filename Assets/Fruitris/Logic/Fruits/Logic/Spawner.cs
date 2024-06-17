@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -18,12 +19,20 @@ public class Spawner : MonoBehaviour
 
     private Vector2 _mousePositon;
     private Fruit _currentFruit;
+    public float _cooldownTimer = 0.25f;
+    private bool _canSpawn = true;
+    private float _timer;
+
+    private void Start()
+    {
+        _timer = _cooldownTimer;
+    }
 
     private void Update()
     {
         _mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0) && CheckMousePosition())
+        if (Input.GetMouseButtonDown(0) && CheckMousePosition() && _canSpawn)
         {
             _currentFruit = SpawnFruit(SelectFruit(), new Vector2(_mousePositon.x, gameObject.transform.position.y));
             _currentFruit.ChangeIsGravitational(false);
@@ -33,13 +42,27 @@ public class Spawner : MonoBehaviour
             _currentFruit.ChangeIsGravitational(true);
             _currentFruit.StartCoroutine("Timer");
             _currentFruit = null;
-
+            StartCoroutine(nameof(Timer));
         }
         else if (Input.GetMouseButton(0) && CheckMousePosition() && _currentFruit != null)
         {
             _currentFruit.transform.position = new Vector2(_mousePositon.x, gameObject.transform.position.y);
         }
     }
+
+    public IEnumerator Timer()
+    {
+        _canSpawn = false;
+        
+        while (_timer > 0)
+        {
+            _timer -= Time.deltaTime;
+            yield return null;
+        }
+        _timer = _cooldownTimer;
+        _canSpawn = true;
+    }
+
     public Fruit SelectFruit()
     {
         return _firstSpawnableFruits[Random.Range(0, _firstSpawnableFruits.Count)];

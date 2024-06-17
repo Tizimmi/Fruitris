@@ -29,6 +29,7 @@ public static class LeaderBoard
         }
 
         _allPlayers.Sort();
+        _topPlayers.Clear();
 
         for (int i = 0; i < count; i++)
         {

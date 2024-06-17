@@ -25,7 +25,7 @@ public class ScoreView : MonoBehaviour
     {  
         _currentScoreArea.text = $"Current score: {_currentScore += score}";
 
-        if (_currentScore > _maxScore)
+        if (_currentScore > _maxScore && _currentScore > GameStateHandler._currentPlayer.MaxScore)
         {
             GameStateHandler._currentPlayer.MaxScore = _currentScore;
             UpdateMaxScore(_currentScore);
@@ -35,6 +35,5 @@ public class ScoreView : MonoBehaviour
     public void UpdateMaxScore(int score)
     {
         _maxScoreArea.text = $"Max score: {score}";
-        //_leaderboardView.UpdateLeaderBoard();
     }
 }
