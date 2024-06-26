@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine.Device;
 using UnityEngine.SceneManagement;
 
 public static class GameStateHandler
@@ -37,17 +38,17 @@ public static class GameStateHandler
     public static void GameQuit()
     {
         SaveGameData();
-
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#else
-    Application.Quit();
-#endif
+        Application.Quit();
     }
 
     public static void SaveGameData()
     {
         _currentPlayer?.SavePlayerData();
         LeaderBoard.SaveLeaderBoard();
+    }
+
+    public static void ClearPlayer()
+    {
+        _currentPlayer = null;
     }
 }
