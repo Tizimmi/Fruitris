@@ -17,6 +17,7 @@ public class LeaderBoardView : MonoBehaviour
     private List<LeaderBoardItemView> _items = new();
     private void Start()
     {
+        _panelCapacity = LeaderBoard._allPlayers.Count;
         Init();
     }
     public void Init()

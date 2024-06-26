@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public static class GameStateHandler
 {
-    public static PlayerData _currentPlayer = null;
+    public static PlayerData _currentPlayer ;
 
     public static void CreatePlayer(PlayerData data)
     {

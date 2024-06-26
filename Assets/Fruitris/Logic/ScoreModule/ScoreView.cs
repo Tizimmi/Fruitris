@@ -19,6 +19,7 @@ public class ScoreView : MonoBehaviour
     private void Start()
     {
         UpdateCurrentScore(_currentScore);
+        UpdateMaxScore(GameStateHandler._currentPlayer.MaxScore);
     }
 
     public void UpdateCurrentScore(int score)
