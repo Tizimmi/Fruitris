@@ -2,35 +2,31 @@
 
 public class CollisionInfoCollection
 {
-    private class CollisionInfo
-    {
-        public Fruit FirstFruit;
-        public Fruit SecondFruit;
+	private class CollisionInfo
+	{
+		public readonly Fruit FirstFruit;
+		public readonly Fruit SecondFruit;
 
-        public CollisionInfo(Fruit firstFruit, Fruit secondFruit)
-        {
-            FirstFruit = firstFruit;
-            SecondFruit = secondFruit;
-        }
-    }
+		public CollisionInfo(Fruit firstFruit, Fruit secondFruit)
+		{
+			FirstFruit = firstFruit;
+			SecondFruit = secondFruit;
+		}
+	}
 
-    private List<CollisionInfo> _collection = new();
+	private readonly List<CollisionInfo> _collection = new();
 
-    public void AddItemInCollection(Fruit firstFruit, Fruit secondFruit)
-    {
-        _collection.Add(new CollisionInfo(firstFruit, secondFruit));
-    }
+	public void AddItemInCollection(Fruit firstFruit, Fruit secondFruit)
+	{
+		_collection.Add(new CollisionInfo(firstFruit, secondFruit));
+	}
 
-    public bool Contains(Fruit fruit)
-    {
-        foreach (var item in _collection)
-        {
-            if (item.FirstFruit == fruit || item.SecondFruit == fruit)
-            {
-                return true;
-            }
-        }
+	public bool Contains(Fruit fruit)
+	{
+		foreach (var item in _collection)
+			if (item.FirstFruit == fruit || item.SecondFruit == fruit)
+				return true;
 
-        return false;
-    }
+		return false;
+	}
 }

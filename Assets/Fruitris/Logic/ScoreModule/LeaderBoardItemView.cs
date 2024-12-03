@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class LeaderBoardItemView : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI _playerNameAndScore;
+	[SerializeField]
+	private TextMeshProUGUI _playerNameAndScore;
 
-    public void Init(PlayerData player, int place)
-    {
-        _playerNameAndScore.text = $"{place}. {player.Nickname}:{player.MaxScore}";
-    }
+	public void Init(PlayerData player, int place)
+	{
+		_playerNameAndScore.text = $"{place}. {player.Nickname}:{player.MaxScore}";
+	}
 }

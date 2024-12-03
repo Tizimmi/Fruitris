@@ -18,11 +18,6 @@ public class PlayerData : IComparable<PlayerData>
 		MaxScore = player.MaxScore;
 	}
 
-	public void SavePlayerData()
-	{
-		PlayerSaveHandler.SavePlayerInfo(this);
-	}
-
 	public int CompareTo(PlayerData other)
 	{
 		if (MaxScore < other.MaxScore)
@@ -32,5 +27,10 @@ public class PlayerData : IComparable<PlayerData>
 			return 0;
 
 		return -1;
+	}
+
+	public void SavePlayerData()
+	{
+		PlayerSaveHandler.SavePlayerInfo(this);
 	}
 }

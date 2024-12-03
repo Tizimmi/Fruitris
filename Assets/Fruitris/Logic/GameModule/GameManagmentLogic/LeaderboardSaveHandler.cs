@@ -4,43 +4,41 @@ using UnityEngine;
 
 public static class LeaderboardSaveHandler
 {
-    const string SaveKey = "LeaderboardSave";
-    public static SaveData Load()
-    {
-        PlayerPrefs.GetString(SaveKey, "default");
-        SaveData saveInfo;
-        if (PlayerPrefs.HasKey(SaveKey))
-        {
-            var json = PlayerPrefs.GetString(SaveKey);
-            saveInfo = JsonUtility.FromJson<SaveData>(json);
-        }
-        else
-        {
-            saveInfo = new SaveData();
-        }
+	[Serializable]
+	public class SaveData
+	{
+		public List<PlayerData> _allPlayerData = new();
 
-        return saveInfo;
-    }
+		public SaveData(List<PlayerData> data)
+		{
+			_allPlayerData = data;
+		}
 
-    public static void Save(SaveData data)
-    {
-        var json = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString(SaveKey, json);
-    }
-    [Serializable]
-    public class SaveData
-    {
-        public List<PlayerData> _allPlayerData = new();
+		public SaveData() { }
+	}
 
-        public SaveData(List<PlayerData> data)
-        {
-            _allPlayerData = data;
-        }
+	const string SaveKey = "LeaderboardSave";
 
-        public SaveData()
-        {
+	public static SaveData Load()
+	{
+		PlayerPrefs.GetString(SaveKey, "default");
+		SaveData saveInfo;
+		if (PlayerPrefs.HasKey(SaveKey))
+		{
+			var json = PlayerPrefs.GetString(SaveKey);
+			saveInfo = JsonUtility.FromJson<SaveData>(json);
+		}
+		else
+		{
+			saveInfo = new SaveData();
+		}
 
-        }
-    }
+		return saveInfo;
+	}
 
+	public static void Save(SaveData data)
+	{
+		var json = JsonUtility.ToJson(data);
+		PlayerPrefs.SetString(SaveKey, json);
+	}
 }
