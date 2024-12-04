@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿using Fruitris.Logic.ScoreModule;
+using UnityEngine;
 using Zenject;
 
-public class GameOverInstaller : MonoInstaller
+namespace Fruitris.Logic.GameModule.GameInstallers
 {
-	[SerializeField]
-	private LeaderBoardView _leaderboard;
-
-	public override void InstallBindings()
+	public class GameOverInstaller : MonoInstaller
 	{
-		Container.Bind<GamePrefabFactory>().AsSingle().NonLazy();
-		Container.Bind<LeaderBoardView>().FromInstance(_leaderboard).AsSingle().NonLazy();
+		[SerializeField]
+		private LeaderBoardView _leaderboard;
+
+		public override void InstallBindings()
+		{
+			Container.Bind<GamePrefabFactory>().AsSingle().NonLazy();
+			Container.Bind<LeaderBoardView>().FromInstance(_leaderboard).AsSingle().NonLazy();
+		}
 	}
 }

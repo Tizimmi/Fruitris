@@ -1,94 +1,99 @@
-﻿using System.Collections;
+﻿using Fruitris.Logic.GameModule.GameInstallers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Spawner : MonoBehaviour
+namespace Fruitris.Logic.Fruits.Logic
 {
-	[SerializeField]
-	public List<Fruit> fruits;
-	public float _cooldownTimer = 0.25f;
-	[SerializeField]
-	private List<Fruit> _firstSpawnableFruits;
-	[SerializeField]
-	private Transform _fruitsRoot;
-	[SerializeField]
-	private LayerMask _raycastMask;
-
-	[Inject]
-	private readonly GamePrefabFactory _gamePrefabFactory;
-	private bool _canSpawn = true;
-	private Fruit _currentFruit;
-
-	private Vector2 _mousePositon;
-	private float _timer;
-
-	private void Start()
+	public class Spawner : MonoBehaviour
 	{
-		_timer = _cooldownTimer;
-	}
+		[SerializeField]
+		public List<Fruit> _fruits;
+		public float _cooldownTimer = 0.25f;
+		[SerializeField]
+		private List<Fruit> _firstSpawnableFruits;
+		[SerializeField]
+		private Transform _fruitsRoot;
+		[SerializeField]
+		private LayerMask _raycastMask;
 
-	private void Update()
-	{
-		_mousePositon = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		[Inject]
+		private readonly GamePrefabFactory _gamePrefabFactory;
+		private bool _canSpawn = true;
+		private Fruit _currentFruit;
 
-		if (Input.GetMouseButtonDown(0) && CheckMousePosition() && _canSpawn)
-		{
-			_currentFruit = SpawnFruit(SelectFruit(), new Vector2(_mousePositon.x, gameObject.transform.position.y));
-			_currentFruit.ChangeIsGravitational(false);
-		}
-		else if (Input.GetMouseButtonUp(0) && _currentFruit != null)
-		{
-			_currentFruit.ChangeIsGravitational(true);
-			_currentFruit.StartCoroutine("Timer");
-			_currentFruit = null;
-			StartCoroutine(nameof(Timer));
-		}
-		else if (Input.GetMouseButton(0) && CheckMousePosition() && _currentFruit != null)
-		{
-			_currentFruit.transform.position = new Vector2(_mousePositon.x, gameObject.transform.position.y);
-		}
-	}
+		private Vector2 _mousePosition;
+		private float _timer;
 
-	public IEnumerator Timer()
-	{
-		_canSpawn = false;
-
-		while (_timer > 0)
+		private void Start()
 		{
-			_timer -= Time.deltaTime;
-			yield return null;
+			_timer = _cooldownTimer;
 		}
 
-		_timer = _cooldownTimer;
-		_canSpawn = true;
-	}
+		private void Update()
+		{
+			if (Camera.main != null)
+				_mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-	public Fruit SelectFruit()
-	{
-		return _firstSpawnableFruits[Random.Range(0, _firstSpawnableFruits.Count)];
-	}
+			if (Input.GetMouseButtonDown(0) && CheckMousePosition() && _canSpawn)
+			{
+				_currentFruit = SpawnFruit(SelectFruit(), new Vector2(_mousePosition.x, gameObject.transform.position.y));
+				_currentFruit.ChangeIsGravitational(false);
+			}
+			else if (Input.GetMouseButtonUp(0) && _currentFruit != null)
+			{
+				_currentFruit.ChangeIsGravitational(true);
+				_currentFruit.StartCoroutine(nameof(Fruit.Timer));
+				_currentFruit = null;
+				StartCoroutine(nameof(Timer));
+			}
+			else if (Input.GetMouseButton(0) && CheckMousePosition() && _currentFruit != null)
+			{
+				_currentFruit.transform.position = new Vector2(_mousePosition.x, gameObject.transform.position.y);
+			}
+		}
 
-	public void SpawnFruit(int index, Vector2 spawnPosition)
-	{
-		SpawnFruit(fruits[index + 1], spawnPosition);
-	}
+		public IEnumerator Timer()
+		{
+			_canSpawn = false;
 
-	public Fruit SpawnFruit(Fruit fruit, Vector2 spawnPosition)
-	{
-		fruit = _gamePrefabFactory.InstantiatePrefab<Fruit>(fruit,
-			spawnPosition,
-			Quaternion.identity,
-			_fruitsRoot);
+			while (_timer > 0)
+			{
+				_timer -= Time.deltaTime;
+				yield return null;
+			}
 
-		return fruit;
-	}
+			_timer = _cooldownTimer;
+			_canSpawn = true;
+		}
 
-	public bool CheckMousePosition()
-	{
-		return Physics2D.Raycast(_mousePositon,
-			Vector2.down,
-			5,
-			_raycastMask);
+		public void SpawnFruit(int index, Vector2 spawnPosition)
+		{
+			SpawnFruit(_fruits[index + 1], spawnPosition);
+		}
+
+		private Fruit SelectFruit()
+		{
+			return _firstSpawnableFruits[Random.Range(0, _firstSpawnableFruits.Count)];
+		}
+
+		private Fruit SpawnFruit(Fruit fruit, Vector2 spawnPosition)
+		{
+			fruit = _gamePrefabFactory.InstantiatePrefab<Fruit>(fruit,
+				spawnPosition,
+				Quaternion.identity,
+				_fruitsRoot);
+
+			return fruit;
+		}
+
+		private bool CheckMousePosition()
+		{
+			return Physics2D.Raycast(_mousePosition,
+				Vector2.down,
+				5,
+				_raycastMask);
+		}
 	}
 }

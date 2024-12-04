@@ -1,13 +1,17 @@
+using Fruitris.Logic.PlayerModule;
 using TMPro;
 using UnityEngine;
 
-public class LeaderBoardItemView : MonoBehaviour
+namespace Fruitris.Logic.ScoreModule
 {
-	[SerializeField]
-	private TextMeshProUGUI _playerNameAndScore;
-
-	public void Init(PlayerData player, int place)
+	public class LeaderBoardItemView : MonoBehaviour
 	{
-		_playerNameAndScore.text = $"{place}. {player.Nickname}:{player.MaxScore}";
+		[SerializeField]
+		private TextMeshProUGUI _playerNameAndScore;
+
+		public void Init(PlayerData player, int place)
+		{
+			_playerNameAndScore.text = $"{place}. {player._nickname}:{player._maxScore}";
+		}
 	}
 }

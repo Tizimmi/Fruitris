@@ -1,44 +1,48 @@
-﻿using System;
+﻿using Fruitris.Logic.PlayerModule;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class LeaderboardSaveHandler
+namespace Fruitris.Logic.GameModule.GameManagmentLogic
 {
-	[Serializable]
-	public class SaveData
+	public static class LeaderboardSaveHandler
 	{
-		public List<PlayerData> _allPlayerData = new();
-
-		public SaveData(List<PlayerData> data)
+		[Serializable]
+		public class SaveData
 		{
-			_allPlayerData = data;
+			public List<PlayerData> _allPlayerData = new();
+
+			public SaveData(List<PlayerData> data)
+			{
+				_allPlayerData = data;
+			}
+
+			public SaveData() { }
 		}
 
-		public SaveData() { }
-	}
+		private const string SaveKey = "LeaderboardSave";
 
-	const string SaveKey = "LeaderboardSave";
-
-	public static SaveData Load()
-	{
-		PlayerPrefs.GetString(SaveKey, "default");
-		SaveData saveInfo;
-		if (PlayerPrefs.HasKey(SaveKey))
+		public static SaveData Load()
 		{
-			var json = PlayerPrefs.GetString(SaveKey);
-			saveInfo = JsonUtility.FromJson<SaveData>(json);
+			PlayerPrefs.GetString(SaveKey, "default");
+			SaveData saveInfo;
+			if (PlayerPrefs.HasKey(SaveKey))
+			{
+				var json = PlayerPrefs.GetString(SaveKey);
+				saveInfo = JsonUtility.FromJson<SaveData>(json);
+			}
+			else
+			{
+				saveInfo = new SaveData();
+			}
+
+			return saveInfo;
 		}
-		else
+
+		public static void Save(SaveData data)
 		{
-			saveInfo = new SaveData();
+			var json = JsonUtility.ToJson(data);
+			PlayerPrefs.SetString(SaveKey, json);
 		}
-
-		return saveInfo;
-	}
-
-	public static void Save(SaveData data)
-	{
-		var json = JsonUtility.ToJson(data);
-		PlayerPrefs.SetString(SaveKey, json);
 	}
 }

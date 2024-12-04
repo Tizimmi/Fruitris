@@ -1,44 +1,49 @@
-﻿using System.Collections.Generic;
+﻿using Fruitris.Logic.GameModule.GameManagmentLogic;
+using Fruitris.Logic.PlayerModule;
+using System.Collections.Generic;
 using UnityEngine;
 
-public static class LeaderBoard
+namespace Fruitris.Logic.ScoreModule
 {
-	public static List<PlayerData> _allPlayers = new();
-	private static readonly List<PlayerData> _topPlayers = new();
-
-	static LeaderBoard()
+	public static class LeaderBoard
 	{
-		_allPlayers = LeaderboardSaveHandler.Load()._allPlayerData;
-	}
+		public static readonly List<PlayerData> AllPlayers;
+		private static readonly List<PlayerData> TopPlayers = new();
 
-	public static void AddPlayerToAllPlayers(PlayerData data)
-	{
-		_allPlayers.Add(data);
-		SaveLeaderBoard();
-	}
+		static LeaderBoard()
+		{
+			AllPlayers = LeaderboardSaveHandler.Load()._allPlayerData;
+		}
 
-	public static void SaveLeaderBoard()
-	{
-		LeaderboardSaveHandler.Save(new(_allPlayers));
-	}
+		public static void AddPlayerToAllPlayers(PlayerData data)
+		{
+			AllPlayers.Add(data);
+			SaveLeaderBoard();
+		}
 
-	public static List<PlayerData> GetTopPlayers(ref int count)
-	{
-		if (count > _allPlayers.Count) // костылечек
-			count = _allPlayers.Count;
+		public static void SaveLeaderBoard()
+		{
+			LeaderboardSaveHandler.Save(new LeaderboardSaveHandler.SaveData(AllPlayers));
+		}
 
-		_allPlayers.Sort();
-		_topPlayers.Clear();
+		public static List<PlayerData> GetTopPlayers(ref int count)
+		{
+			if (count > AllPlayers.Count)
+				count = AllPlayers.Count;
 
-		for (var i = 0; i < count; i++)
-			_topPlayers.Add(_allPlayers[i]);
+			AllPlayers.Sort();
+			TopPlayers.Clear();
 
-		return _topPlayers;
-	}
+			for (var i = 0; i < count; i++)
+				TopPlayers.Add(AllPlayers[i]);
 
-	public static void ShowLeaderboard()
-	{
-		foreach (var item in _allPlayers)
-			Debug.Log(item.Nickname + " " + item.MaxScore);
+			return TopPlayers;
+		}
+
+		public static void ShowLeaderboard()
+		{
+			foreach (var item in AllPlayers)
+				Debug.Log(item._nickname + " " + item._maxScore);
+		}
 	}
 }

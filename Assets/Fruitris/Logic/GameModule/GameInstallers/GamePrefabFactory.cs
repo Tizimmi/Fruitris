@@ -1,45 +1,48 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class GamePrefabFactory
+namespace Fruitris.Logic.GameModule.GameInstallers
 {
-	[Inject]
-	private readonly DiContainer _container;
-
-	public GameObject InstantiatePrefab(
-		Object prefab,
-		Vector3 position,
-		Quaternion rotation,
-		Transform parentTransform)
+	public class GamePrefabFactory
 	{
-		return _container.InstantiatePrefab(prefab,
-			position,
-			rotation,
-			parentTransform);
-	}
+		[Inject]
+		private readonly DiContainer _container;
 
-	public GameObject InstantiatePrefab(Object prefab, Transform root)
-	{
-		return _container.InstantiatePrefab(prefab, root);
-	}
-
-	public T InstantiatePrefab<T>(
-		Object prefab,
-		Vector3 position,
-		Quaternion rotation,
-		Transform parentTransform)
-		where T : Component
-	{
-		return InstantiatePrefab(prefab,
+		private GameObject InstantiatePrefab(
+			Object prefab,
+			Vector3 position,
+			Quaternion rotation,
+			Transform parentTransform)
+		{
+			return _container.InstantiatePrefab(prefab,
 				position,
 				rotation,
-				parentTransform)
-			.GetComponent<T>();
-	}
+				parentTransform);
+		}
 
-	public T InstantiatePrefab<T>(Object prefab, Transform parentTransform)
-		where T : Component
-	{
-		return InstantiatePrefab(prefab, parentTransform).GetComponent<T>();
+		private GameObject InstantiatePrefab(Object prefab, Transform root)
+		{
+			return _container.InstantiatePrefab(prefab, root);
+		}
+
+		public T InstantiatePrefab<T>(
+			Object prefab,
+			Vector3 position,
+			Quaternion rotation,
+			Transform parentTransform)
+			where T : Component
+		{
+			return InstantiatePrefab(prefab,
+					position,
+					rotation,
+					parentTransform)
+				.GetComponent<T>();
+		}
+
+		public T InstantiatePrefab<T>(Object prefab, Transform parentTransform)
+			where T : Component
+		{
+			return InstantiatePrefab(prefab, parentTransform).GetComponent<T>();
+		}
 	}
 }

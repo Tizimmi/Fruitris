@@ -1,49 +1,54 @@
-﻿using UnityEngine.Device;
+﻿using Fruitris.Logic.PlayerModule;
+using Fruitris.Logic.ScoreModule;
+using UnityEngine.Device;
 using UnityEngine.SceneManagement;
 
-public static class GameStateHandler
+namespace Fruitris.Logic.GameModule.GameManagmentLogic
 {
-	public static PlayerData _currentPlayer;
-
-	public static void CreatePlayer(PlayerData data)
+	public static class GameStateHandler
 	{
-		PlayerSaveHandler.SavePlayerInfo(data);
-		_currentPlayer = data;
-	}
+		public static PlayerData _currentPlayer;
 
-	public static void GameStart()
-	{
-		if (_currentPlayer == null)
-			CreatePlayer(new("Noname", 0));
+		public static void CreatePlayer(PlayerData data)
+		{
+			PlayerSaveHandler.SavePlayerInfo(data);
+			_currentPlayer = data;
+		}
 
-		SceneManager.LoadScene("GameplayScene");
-	}
+		public static void GameStart()
+		{
+			if (_currentPlayer == null)
+				CreatePlayer(new PlayerData("Noname", 0));
 
-	public static void GameOver()
-	{
-		if (LeaderBoard._allPlayers.Contains(_currentPlayer) == false)
-			LeaderBoard.AddPlayerToAllPlayers(_currentPlayer);
+			SceneManager.LoadScene("GameplayScene");
+		}
 
-		SceneManager.LoadScene(2);
-		LeaderBoard.ShowLeaderboard();
-	}
+		public static void GameOver()
+		{
+			if (LeaderBoard.AllPlayers.Contains(_currentPlayer) == false)
+				LeaderBoard.AddPlayerToAllPlayers(_currentPlayer);
 
-	public static void GameRestart() { }
+			SceneManager.LoadScene(2);
+			LeaderBoard.ShowLeaderboard();
+		}
 
-	public static void GameQuit()
-	{
-		SaveGameData();
-		Application.Quit();
-	}
+		public static void GameRestart() { }
 
-	public static void SaveGameData()
-	{
-		_currentPlayer?.SavePlayerData();
-		LeaderBoard.SaveLeaderBoard();
-	}
+		public static void GameQuit()
+		{
+			SaveGameData();
+			Application.Quit();
+		}
 
-	public static void ClearPlayer()
-	{
-		_currentPlayer = null;
+		private static void SaveGameData()
+		{
+			_currentPlayer?.SavePlayerData();
+			LeaderBoard.SaveLeaderBoard();
+		}
+
+		public static void ClearPlayer()
+		{
+			_currentPlayer = null;
+		}
 	}
 }

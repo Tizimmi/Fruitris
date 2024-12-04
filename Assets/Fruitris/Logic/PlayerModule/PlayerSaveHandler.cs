@@ -1,29 +1,32 @@
 ﻿using UnityEngine;
 
-public static class PlayerSaveHandler
+namespace Fruitris.Logic.PlayerModule
 {
-	public const string SaveKey = "PlayerSave";
-
-	public static PlayerData LoadPlayerInfo()
+	public static class PlayerSaveHandler
 	{
-		PlayerPrefs.GetString(SaveKey, "Noname");
-		PlayerData saveInfo;
-		if (PlayerPrefs.HasKey(SaveKey))
+		private const string SaveKey = "PlayerSave";
+
+		public static PlayerData LoadPlayerInfo()
 		{
-			var json = PlayerPrefs.GetString(SaveKey);
-			saveInfo = JsonUtility.FromJson<PlayerData>(json);
-		}
-		else
-		{
-			saveInfo = new PlayerData("Noname", 0);
+			PlayerPrefs.GetString(SaveKey, "Noname");
+			PlayerData saveInfo;
+			if (PlayerPrefs.HasKey(SaveKey))
+			{
+				var json = PlayerPrefs.GetString(SaveKey);
+				saveInfo = JsonUtility.FromJson<PlayerData>(json);
+			}
+			else
+			{
+				saveInfo = new PlayerData("Noname", 0);
+			}
+
+			return saveInfo;
 		}
 
-		return saveInfo;
-	}
-
-	public static void SavePlayerInfo(PlayerData data)
-	{
-		var json = JsonUtility.ToJson(data);
-		PlayerPrefs.SetString(SaveKey, json);
+		public static void SavePlayerInfo(PlayerData data)
+		{
+			var json = JsonUtility.ToJson(data);
+			PlayerPrefs.SetString(SaveKey, json);
+		}
 	}
 }

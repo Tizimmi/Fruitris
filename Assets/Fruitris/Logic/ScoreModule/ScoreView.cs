@@ -1,40 +1,41 @@
-﻿using TMPro;
+﻿using Fruitris.Logic.GameModule.GameManagmentLogic;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class ScoreView : MonoBehaviour
+namespace Fruitris.Logic.ScoreModule
 {
-	[SerializeField]
-	private TextMeshProUGUI _currentScoreArea;
-	[SerializeField]
-	private TextMeshProUGUI _maxScoreArea;
-	[SerializeField]
-	private int _currentScore = 0;
-	[SerializeField]
-	private int _maxScore = 0;
-
-	[Inject]
-	private readonly LeaderBoardView _leaderboardView;
-
-	private void Start()
+	public class ScoreView : MonoBehaviour
 	{
-		UpdateCurrentScore(_currentScore);
-		UpdateMaxScore(GameStateHandler._currentPlayer.MaxScore);
-	}
+		[SerializeField]
+		private TextMeshProUGUI _currentScoreArea;
+		[SerializeField]
+		private TextMeshProUGUI _maxScoreArea;
+		[SerializeField]
+		private int _currentScore;
+		[SerializeField]
+		private int _maxScore;
 
-	public void UpdateCurrentScore(int score)
-	{
-		_currentScoreArea.text = $"Current score: {_currentScore += score}";
-
-		if (_currentScore > _maxScore && _currentScore > GameStateHandler._currentPlayer.MaxScore)
+		private void Start()
 		{
-			GameStateHandler._currentPlayer.MaxScore = _currentScore;
-			UpdateMaxScore(_currentScore);
+			UpdateCurrentScore(_currentScore);
+			UpdateMaxScore(GameStateHandler._currentPlayer._maxScore);
 		}
-	}
 
-	public void UpdateMaxScore(int score)
-	{
-		_maxScoreArea.text = $"Max score: {score}";
+		public void UpdateCurrentScore(int score)
+		{
+			_currentScoreArea.text = $"Current score: {_currentScore += score}";
+
+			if (_currentScore > _maxScore && _currentScore > GameStateHandler._currentPlayer._maxScore)
+			{
+				GameStateHandler._currentPlayer._maxScore = _currentScore;
+				UpdateMaxScore(_currentScore);
+			}
+		}
+
+		private void UpdateMaxScore(int score)
+		{
+			_maxScoreArea.text = $"Max score: {score}";
+		}
 	}
 }

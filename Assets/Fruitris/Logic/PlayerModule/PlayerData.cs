@@ -1,36 +1,39 @@
 using System;
 
-[Serializable]
-public class PlayerData : IComparable<PlayerData>
+namespace Fruitris.Logic.PlayerModule
 {
-	public string Nickname;
-	public int MaxScore;
-
-	public PlayerData(string nickname, int maxscore)
+	[Serializable]
+	public class PlayerData : IComparable<PlayerData>
 	{
-		Nickname = nickname;
-		MaxScore = maxscore;
-	}
+		public string _nickname;
+		public int _maxScore;
 
-	public PlayerData(PlayerData player)
-	{
-		Nickname = player.Nickname;
-		MaxScore = player.MaxScore;
-	}
+		public PlayerData(string nickname, int maxscore)
+		{
+			_nickname = nickname;
+			_maxScore = maxscore;
+		}
 
-	public int CompareTo(PlayerData other)
-	{
-		if (MaxScore < other.MaxScore)
-			return 1;
+		public PlayerData(PlayerData player)
+		{
+			_nickname = player._nickname;
+			_maxScore = player._maxScore;
+		}
 
-		if (MaxScore == other.MaxScore)
-			return 0;
+		public int CompareTo(PlayerData other)
+		{
+			if (_maxScore < other._maxScore)
+				return 1;
 
-		return -1;
-	}
+			if (_maxScore == other._maxScore)
+				return 0;
 
-	public void SavePlayerData()
-	{
-		PlayerSaveHandler.SavePlayerInfo(this);
+			return -1;
+		}
+
+		public void SavePlayerData()
+		{
+			PlayerSaveHandler.SavePlayerInfo(this);
+		}
 	}
 }

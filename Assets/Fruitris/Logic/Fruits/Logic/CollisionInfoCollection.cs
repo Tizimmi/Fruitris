@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Fruitris.Logic.Fruits.Logic;
+using System.Collections.Generic;
 
 public class CollisionInfoCollection
 {
