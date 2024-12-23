@@ -44,11 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f216a561f6cf3448c187033ef9875a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstSpawnableFruits:
-  - {fileID: -6886517401214080112, guid: c3784e176daf32b44a70bfac42318a43, type: 3}
-  - {fileID: -1172032977041978050, guid: a59af279b48d7534f8fe49b50c8f896b, type: 3}
-  _fruitsRoot: {fileID: 3725573927306827045}
-  fruits:
+  _fruits:
   - {fileID: -6886517401214080112, guid: c3784e176daf32b44a70bfac42318a43, type: 3}
   - {fileID: -1172032977041978050, guid: a59af279b48d7534f8fe49b50c8f896b, type: 3}
   - {fileID: -5185377735769379649, guid: a6877a314d9a8c942b3925ea0107edef, type: 3}
@@ -59,6 +55,11 @@ MonoBehaviour:
   - {fileID: -9065795862591585888, guid: 04dfb1b7949ecfa4c8ca7c43fe985378, type: 3}
   - {fileID: -7442280235866803835, guid: 9f93fac9241654e4b90337e9bce55bac, type: 3}
   - {fileID: 5848626750440398653, guid: a46d9d2d1697b9d48a7d52ccc05eb4f0, type: 3}
+  _cooldownTimer: 0.25
+  _firstSpawnableFruits:
+  - {fileID: -6886517401214080112, guid: c3784e176daf32b44a70bfac42318a43, type: 3}
+  - {fileID: -1172032977041978050, guid: a59af279b48d7534f8fe49b50c8f896b, type: 3}
+  _fruitsRoot: {fileID: 3725573927306827045}
   _raycastMask:
     serializedVersion: 2
     m_Bits: 64

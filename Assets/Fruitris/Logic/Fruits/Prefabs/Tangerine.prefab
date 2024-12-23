@@ -50,7 +50,7 @@ MonoBehaviour:
   _value: 6
   _rb2d: {fileID: 5393963213646983304}
   _prefabReference: {fileID: 1882181697482146988}
-  _invunerabilityTimer: 1
+  _invulnerabilityTimer: 1.5
 --- !u!212 &7585264670980979444
 SpriteRenderer:
   m_ObjectHideFlags: 0
